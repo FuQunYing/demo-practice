@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+		function Flyer(fname,speed){//抽象类型，找不到具体的实例与之对应
+			this.fname=fname;
+			this.speed=speed;
+		}
+		Flyer.prototype.fly=function(){
+			console.log(this.fname+"以时速"+this.speed+"飞行");
+		}
+		function Plane(fname,speed,score){
+			Flyer.call(this,fname,speed);
+			this.score=score;
+		}
+		Plane.prototype.getScore=function(){
+			console.log("击落"+this.fname+"得"+this.score);
+		}
+		function Bee(fname,speed,award){
+			Flyer.call(this,fname,speed);
+			this.award=award;
+		}
+		Bee.prototype.getAward=function(){
+			console.log("击落"+this.fname+"得"+this.award);
+		}
+		Object.setPrototypeOf(Plane.prototype,Flyer.prototype);
+		Object.setPrototypeOf(Bee.prototype,Flyer.prototype);
+		var f16=new Plane("f16",1000,100);
+		f16.fly();
+		f16.getScore();
+		var b=new Bee("小蜜蜂",100,"一条生命");
+		b.fly();
+		b.getAward();
+  </script>
+ </body>
+</html>

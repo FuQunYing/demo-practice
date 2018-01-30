@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+	<script>
+		/*var eric={
+			name:"Eric",
+			id:1001
+		}
+		Object.defineProperties(eric,{
+			_age:{value:25,writable:true},
+			age:{
+				get(){return this._age}
+				set(val){
+					if(val>=18&&val<=65) this._age=val;
+					else throw new RangeError("年龄必须介于18~65之间")
+				},
+				enumerable:true;
+			}
+		})
+		eric.age=26;
+		console.log(eric.age);
+		eric.age=-2;*/
+
+		"use strict"
+		function Emp(id,ename,salary,age){
+			this.id=id;
+			this.ename=ename;
+			this.salary=salary;
+
+			Object.defineProperties(this,{
+				id:{writable:false},
+				salary:{enumerable:false},
+				_age:{value:null,writable:true},
+				age:{
+					get(){return this._age},
+					set(val){
+						if(val>=18&&val<=65) this._age=val;
+						else throw new RangeError("年龄必须介于18~65之间");
+					},
+					enumerable:true
+				}
+			})
+			this.age=age;
+			Object.seal(this);
+		}
+		var eric=new Emp(1001,"Eric",12000,25);
+		for(var key in  eric){console.log(key+" : "+eric[key])}
+		eric.age=26;
+		console.dir(eric)
+	</script>
+ </body>
+</html>

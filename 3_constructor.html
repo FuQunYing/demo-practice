@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数</title>
+</head>
+<body>
+<script>
+    function Student(sname,age){
+        this.sname=sname;
+        this.age=age;
+    }
+    Student.prototype.intr=function(){
+        console.log("i'm"+this.sname+", i'm"+this.age);
+    };
+    Student.prototype.className="初三九班";
+    var lilei=new Student("li lei ",12);
+    var hmm=new Student("Han Meimei ",12);
+    console.dir(lilei);
+    console.log(hmm);
+    lilei.intr();
+    console.log(lilei.className);
+    hmm.intr();
+</script>
+</body>
+</html>

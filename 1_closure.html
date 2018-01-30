@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+	<button>click me!</button>
+	<button>click me!</button>
+	<button>click me!</button>
+	<button>click me!</button>
+	<button>click me!</button>
+	<button>click me!</button>
+	<script>
+		var btns = document.getElementsByTagName("button");
+		for(var i=0 ;i<btns.length;i++){
+			btns[i].onclick=(function(){
+				//alert(i);//6
+				var index=i+1;
+				return function(){
+					alert(index)
+				}
+			})();
+		}
+	</script>
+ </body>
+</html>
