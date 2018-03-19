@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+
+	function setCookie(name,value,time){
+		console.log(1);
+        var d = new Date();
+        d.setTime(d.getTime() + (time * 60 * 1000));
+        var expires = 'expires=' + d.toGMTString();
+        document.cookie = name + '=' + value + '; ' + expires;
+    }
+	function getCookie(name){
+        var n = name + '=';
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(n) === 0) {
+                return c.substring(n.length, c.length);
+            }
+        }
+        return '';
+    }
+	setCookie("name","Sherlock",10);
+	console.log(getCookie("name"));
+  </script>
+ </body>
+</html>

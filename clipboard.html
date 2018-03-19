@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">点我复制</button>
+<script>
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click',() => {
+        // const input = document.querySelector('#demoInput');
+        const input = document.createElement('input');
+        input.setAttribute('readonly','readonly');//兼容iOS，键盘跳出来的一瞬间
+        input.setAttribute('value','复制我。');
+        document.body.appendChild(input);
+        input.setSelectionRange(0,9999);//兼容iOS，内容不能全部被选中的问题
+        input.select();
+        if(document.execCommand('copy')){
+            document.execCommand('copy');
+            console.log('复制成功');
+        }
+        document.body.removeChild(input);
+    })
+</script>
+</body>
+</html>
