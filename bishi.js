@@ -84,11 +84,14 @@ console.log(r);
 var arr=arr.sort().join("")//.match(/(\d)\1*!/g)
     .replace(/(\d)(\1*)/g,"$1").split("");
 console.log(arr);
-//ES6数组去重方法
+//ES6数组去重方法一
 function dedupe(array){
 	return Array.from(new Set(array))
 }
 dedupe([1,2,3,,4,4])//[1,2,3,4]
+//ES6数组去重方法二：
+let arr=[3,5,5,2,2,5]
+let unique=[...new Set(arr)]//[3,5,2]
 */
 //day02
 //1.将字符串中变为下面的样子，对字符串中的每个单词分别执行不同的操作
