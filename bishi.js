@@ -1,6 +1,6 @@
-//函数记忆
+
 /*
-//1.判断质数
+//1.判断质数，函数记忆的方式，如果hash对象中存在了直接返回，不存在了再进行for循环
 var isPrime=(function(){
     var hash={};
     return function(n){
@@ -12,7 +12,6 @@ var isPrime=(function(){
                 return hash[n];
             }
             else{
-                
                 console.log("执行for循环 ");
                 for(var i=3;i<Math.sqrt(n);i+=2){
                     if(n%i==0){
@@ -33,6 +32,7 @@ console.log(isPrime(113));
 console.log(isPrime(117));
 console.log(isPrime(113));
 */
+
 /*
 //2.1 插入排序
 var arr=[4,2,5,3,1];
@@ -49,6 +49,7 @@ function insertSort(arr){//插入排序
 }
 insertSort(arr);
 console.log(arr);
+
 //2.2 快速排序
 var arr=[6,3,1,5,4,7,2];
 function quickSort(arr){
@@ -65,35 +66,42 @@ function quickSort(arr){
     }
 }
 arr=quickSort(arr);
-console.log(arr);*/
-/*//3.数组去重
+console.log(arr);
+*/
+
+/*
+//3.数组去重
 var arr=[3,1,2,1,4,2,3,2];
 var r=[];
 var hash={};
 for(var i=0;i<arr.length;i++){
     //如果r中没有arr[i]
-   /!* if(r.indexOf(arr[i]==-1))//本质上还是循环
-        r.push(arr[i]);//才将arr[i]压入r*!/
-   if(hash[arr[i]]===undefined){
+   //if(r.indexOf(arr[i]==-1)) //本质上还是循环
+        //r.push(arr[i]);//才将arr[i]压入r
+   if(hash[arr[i]]===undefined){//hash对象的方式，如果hash中没有arr[i]
        hash[arr[i]]=1;
-       r.push(arr[i])
+       r.push(arr[i])//才将arr[i]压入r
    }
 }
 console.log(r);
+
 //不遍历--效率并不高
 var arr=arr.sort().join("")//.match(/(\d)\1*!/g)
     .replace(/(\d)(\1*)/g,"$1").split("");
 console.log(arr);
+
 //ES6数组去重方法一
 function dedupe(array){
 	return Array.from(new Set(array))
 }
 dedupe([1,2,3,,4,4])//[1,2,3,4]
+
 //ES6数组去重方法二：
 let arr=[3,5,5,2,2,5]
 let unique=[...new Set(arr)]//[3,5,2]
 */
-//day02
+
+/*String的相关
 //1.将字符串中变为下面的样子，对字符串中的每个单词分别执行不同的操作
 var str="ryan is not a good man";
         //ryan5 is6 not7 a8 good9 man10
@@ -102,6 +110,7 @@ str=str.replace(/\b[a-z]+\b/ig,function(kw){
     return kw+n++;
 });
 console.log(str);
+
 //2.计算一个只有乘法和加法的表达式的值//比如: 1+23*2+3*3*3
 function calc(exp) {
     var arr=exp.split("+");
@@ -121,15 +130,15 @@ function calc(exp) {
     return sum;
 }
 console.log(calc("1+23*2+3*3*3"));
+
 //3.查找字符串中出现次数最多的字符，共出现几次?
 var str="abdcbcdadcabce";
 //方法一
-/*
 var result=str.split("")
     .sort().join("").match(/([a-z])\1*!/g)
     .sort((a,b)=>b.length-a.length)[0];
 console.log("出现最多的字符是"+result[0]+"，次数："+result.length)
-*/
+
 //方法二
 var hash={};
 for(var i=0;i<str.length;i++){
@@ -145,6 +154,8 @@ for(var key in hash){
     }
 }
 console.log("出现次数最多的字符是："+word+"，次数："+count);
+*/
+/*数组相关
 //4.数组降维
 var arr=[
     [0,0,0,0],
@@ -155,6 +166,7 @@ var arr=[
 // arr=String(arr).split(",");
 arr=Array.prototype.concat.apply([],arr);
 console.log(arr);
+
 //5.给定降序排列好的数组:
 var arr=[8,7,6,5,4,3,2,1];
         //i             j
@@ -179,25 +191,24 @@ for(var i=0,j=arr.length-1;i<j;){
         i++;j--;
     }
 }
-//6.function
+*/
+
 /*
+//6.function
 var f=function(){ var a=  b=1; };//执行时从右向左，b已经相当于是全局变量
 f();
 console.log(b);//1
 console.log(a);//报错，因为a是在函数内var出来的，局部变量
-*/
 
-/*
 var f=function(){ var a=b=1; }
 setTimeout(f,0);
 console.log(b);//报错，定时器的函数是在最后调用的，此时还没有b
 f();
-*/
 
-/*var a,b=0,fn=function(){var a=b=2};
+var a,b=0,fn=function(){var a=b=2};
 fn();
 console.log(a);//undefined
-console.log(b);//2*/
+console.log(b);//2
 
 var emp={
     work:function(){
@@ -209,19 +220,19 @@ var emp={
     }
 };
 console.log(emp.work(3,2,1));
+*/
 
+/*闭包相关
 //7.闭包
 var a=0,b=0;
 function A(a){//外层函数
-    //外层函数向外返回内层函数--给全局变量A赋值;
-    A=function(b){console.log(a+b++);};
+    A=function(b){console.log(a+b++);};//外层函数向外返回内层函数--给全局变量A赋值;
     console.log(a);
 }
 A(1);//输出1，经过此番函数调用，A也变成了A=function(b){console.log(a+b++);};
 A(12);//13,经过上一次函数调用a=1，这次调用的A是被重新赋值过的，所以函数内直接执行1+12
 
-//day03
-//1.闭包
+
 function fun(n,o){
     console.log(o);//输出第二个参数
     return {
@@ -231,21 +242,21 @@ function fun(n,o){
     }
 }
 var b=fun(0)//undefined
-    /*b:{fun(){return fun(m,n=0)}}*/
+    b:{fun(){return fun(m,n=0)}}
     .fun(1)//0
-    /*b:{fun(){return fun(m,n=1)}}*/
+    b:{fun(){return fun(m,n=1)}}
     .fun(2)//在上一步的基础上进行调用，1
-    /*b:{fun(){return fun(m,n=2)}}*/
+    b:{fun(){return fun(m,n=2)}}
     .fun(3);//2
-// var a=fun(0);//undefined,只传了一个参数，输出o就是undefined
-// /*a:{fun(){return fun(m,n=0)}}，此时a被赋值为内层函数n也在上一步被赋值为0，所以重新调用fun的时候，输出第二个参数总为0*/
-// a.fun(1);//0
-// a.fun(2);//0
-// a.fun(3);//0
+    var a=fun(0);//undefined,只传了一个参数，输出o就是undefined
+   a:{fun(){return fun(m,n=0)}}，此时a被赋值为内层函数n也在上一步被赋值为0，所以重新调用fun的时候，输出第二个参数总为0
+   a.fun(1);//0
+   a.fun(2);//0
+   a.fun(3);//0
 
 var c=fun(0)//undefined
     .fun(1);//0
-/*c:{fun(){return fun(m,n=1)}}*/
+c:{fun(){return fun(m,n=1)}}
 c.fun(2);//1
 c.fun(3);//1
 
@@ -260,12 +271,12 @@ function fun(){
         arr.push(x);
         //arr.push(function(){console.log(i)})
     }//i=4,边界值
-  /*  arr:[
+  arr:[
         { function(){console.log(i)}},
         { function(){console.log(i)}},
         { function(){console.log(i)}},
         { function(){console.log(i)}},
-    ]*/
+    ]
 }
 fun();
 arr[0].fun();//4
@@ -287,8 +298,10 @@ var funs=(function(){
 funs[0]();//3
 funs[1]();//3
 funs[2]();//3
+*/
 
-//2.面向对象
+/*面向对象相关
+//1.
 window.a=300;
 function fn1(){
     this.a=100; this.b=200;
@@ -296,16 +309,15 @@ function fn1(){
         alert(this.a);
     }.call(arguments[0]);//call用undefined来替换this的指向，那就相当于this->window 所以alert 300
 }
-function fn2(){ this.a=new fn1();/*没有return */}
+function fn2(){ this.a=new fn1();//没有return }
 var a=new fn1()//300,执行结束 {a:100,b:200}
     .b;//a:200
 var v=new fn1(
     fn2()
-    /*200,这句话执行完，a变成了对象{a:100,b:200}*/
+    //200,这句话执行完，a变成了对象{a:100,b:200}
 );//alert({a:100,b:200})-->即[object,Object]
 
-
-//3.
+//2.
 var setObj=function(o){
     //o=p={name:"xiaoming",age:24};
     o.name="xiaoming";
@@ -314,8 +326,9 @@ var setObj=function(o){
 }
 var p={name:"xixi",age:24};
 setObj(p);
-console.log(p);//
-//4.面向对象+闭包
+console.log(p);//{name:'xiaoming',age:24}
+
+//3.面向对象+闭包
 var number=2;//4 //8
 var obj={
     number:4,//8
@@ -330,13 +343,13 @@ var obj={
             alert(number);
         }
     })()
-    /*
-    fn1:function(){(number=3,9,27)
-     this.number*=2;
-     number*=3;
-     alert(number);
-     }
-    */
+   
+    //fn1:function(){(number=3,9,27)
+    //this.number*=2;
+     //number*=3;
+     //alert(number);
+     //}
+    
 };
 var fn1=obj.fn1;
 alert(number);//4，全局的
@@ -345,4 +358,4 @@ obj.fn1();//27，调用也还是用自己，前面的对闭包内的没有影响
 alert(window.number);//8
 alert(obj.number);//8
 
-//5,
+//TODO:面试题day03面向对象
