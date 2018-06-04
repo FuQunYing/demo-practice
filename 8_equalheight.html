@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>多列等高</title>
+		<style>
+			/* .main{overflow: hidden;} */
+			.main>li{
+				float: left;
+				/* margin: 0 10px -9999px 0; */
+				/* padding-bottom: 9999px; */
+				width: 200px;
+				border: 1px solid #000;
+				list-style:none;
+			}
+		</style>
+	</head>
+	<script src="jquery-3.3.1.js"></script>
+	<body>
+		<ul class='main'>
+			<li class='js-height'>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, asperiores, magnam facilis praesentium deleniti amet molestias veritatis nostrum a illo consequuntur accusamus animi rem in repellat totam voluptatum distinctio placeat.	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, ducimus, enim, dolorem commodi totam eos architecto molestias atque qui eum pariatur quaerat illo sit sequi sapiente fugiat odit. Ipsa, autem.	 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, error, accusamus harum ut delectus nobis beatae labore amet quo quos velit ea tempora expedita rerum eius omnis fugiat laboriosam iusto.</p>
+			</li>
+			<li class='js-height'>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, officia, sit, enim ut aperiam esse in assumenda voluptatum impedit dolorum eaque quaerat velit minima aliquid praesentium consequatur delectus perferendis obcaecati?</p>
+			</li>
+			<li class='js-height'>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, doloremque, voluptatem, atque mollitia quae ipsam reiciendis voluptatibus iste obcaecati recusandae asperiores maiores commodi veniam consequuntur aut unde beatae consectetur harum!  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, porro, temporibus dicta a recusandae libero veniam dolor laboriosam quos maiores quibusdam unde reiciendis quam cupiditate ab minus hic totam officia.</p>
+			</li>
+		</ul>
+	</body>
+	<script>
+	$(document).ready(function(){
+		equalheight()
+	})
+	$(window).resize(function(){
+		$('.js-height').css('height','auto')
+		equalheight()
+	})
+		function equalheight(){
+			var heights=$('.js-height').map(function(){
+				return $(this).height()
+			}).get()
+			console.log(heights);
+			maxheight=Math.max.apply(null, heights);
+			console.log(maxheight)
+			$('.js-height').height(maxheight)
+		}
+// 如果li有边框，用css方法，下边框就会显示不出来
+	</script>
+</html>
