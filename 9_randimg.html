@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title><%= title %></title>
+<!--  <link rel="stylesheet" href="../css/mui.min.css">
+  <link rel="stylesheet" href="../css/pay.css?v=1.0.1">-->
+</head>
+<body>
+<header class="mui-card header">
+  <div class="mui-card-content mui-text-center">
+    <div class="logo">
+      <img src=<%= logo %>>
+    </div>
+    <div><span id=""><span><span id="Mach_snno">loading</span></div>
+    <span id='Mach_showname'>设备联机中...</span>
+  </div>
+</header>
+<div class="mui-content">
+
+  <!--投币卡-->
+<!--  <div class="mui-card mui-text-center">
+    <div class="mui-card-content">
+      <p class="coin-info">请选择支付金额</p>
+      <div class="row just-content-center" id="coinAmount">
+
+        <% for (var i = 0;i < configer.length;i++){ %>
+        <div class="col-4">
+          <div class="coin" data-price= <%= configer[i].amount %> data-coin= <%= configer[i].mcCount %> >
+            <span>￥ </span>
+            <span><%= configer[i].amount/100 %></span>
+          </div>
+          <p class="coin-info"><%= configer[i].remark %></p>
+        </div>
+        <% } %>
+
+      </div>
+    </div>
+  </div>-->
+
+  <!--会员卡-->
+  <div id="member-card" class="mui-card">
+    <div class="mui-card-content">
+      <div class="member-detail">
+        <div class="member-item">
+          <p class="mui-h6">会员卡: <span id='localuseCardida'></span></p>
+          <span class="balance">¥<span id="LocalUsed_Card_amount" class="mui-h2">loading</span>(余额)</span>
+          <div class="redpacket">¥<span id="LocalUsed_Card_redpacket" class="mui-h2">loading</span>(红包)</div>
+        </div>
+        <div class="member-item mui-text-right">
+          <p class="mui-h6">余额、红包<br/>可以再次投币使用</p>
+          <button id='bencarddeposit' class="mui-btn">余额充值</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Deposit-Page" class="mui-popover mui-popover-action mui-popover-bottom">
+    <ul class="mui-table-view " style="">
+      <li id="closedepositpage" class="mui-table-view-cell">
+        <div class="">
+          <h5 class="mui-pull-left text-danger">请选择充值金额</h5>
+          <h4 id="colse-deposit" class="mui-icon mui-icon-close mui-pull-right"></h4>
+        </div>
+      </li>
+      <li id="" class="mui-table-view-cell">
+        <span id="deposit_cardno" class="mui-h5 text-danger mui-text-left">卡号：</span>
+        <span id="deposit_cardname" class="mui-h5 mui-text-left"> ：</span>
+        <h5 id="deposit_shopname" class="mui-h5 mui-text-left">发卡商：</h5>
+        <div class="mui-table">
+          <div class="mui-table-cell mui-text-left">
+            <h5 id="deposit_card_red"></h5>
+          </div>
+          <div class="mui-table-cell mui-text-left">
+            <h5 id="deposit_card_amount"></h5>
+          </div>
+          <div class="mui-table-cell mui-text-right">
+            <h5 id="deposit_card_totalamount"></h5>
+          </div>
+        </div>
+      </li>
+      <li id="" class="mui-table-view-cell">
+        <div id="depositItem2" style="background-color: #write;margin: 0px;padding:0px;"
+             class="mui-table-view mui-grid-view mui-grid-9">
+
+        </div>
+      </li>
+    </ul>
+    <ul id="cho" class="mui-table-view " style="height:auto;color: #000000;">
+      <li class="mui-table-view-cell">
+        <div class="" style="height: 50px;">
+          <p>充值金额
+          <h3 id="depositInfo2" style="color: #FF8C00;"></h3></p>
+        </div>
+        <h5 id="depositInfo3">赠送金额：¥0元</h5>
+      </li>
+      <div class="mui-content-padded">
+        <button id="depositPay" href="#" class="mui-btn mui-btn-green mui-btn-block " style="">
+          充值
+        </button>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<!--倒计时弹出页面-->
+<div id="modal" class="mui-modal toubi-success">
+  <div class="success-wrapper text-center">
+    <div class="success-ico">
+      <i class="mui-icon mui-icon-checkmarkempty"></i>
+    </div>
+    <div class="success-detail">
+      <div class="mui-h2">支付成功</div>
+    </div>
+    <div id="success-loading">
+      <div class="am-loading" aria-label="加载中"><i class="am-icon loading" aria-hidden="true"></i></div>
+    </div>
+    <div class="am-process">
+      <div class="am-process-item pay">
+        <i class="am-icon process success" aria-hidden="true"></i>
+        <div class="am-process-content">
+          <div class="am-process-main">支付成功</div>
+        </div>
+        <div class="am-process-down-border"></div>
+      </div>
+      <div id="process-coin" class="am-process-item unpay">
+        <i class="am-icon process unpay" aria-hidden="true"></i>
+        <div class="am-process-content">
+          <div id="coin_finish0" class="am-process-main">正在出货，请耐心等候<i class="mui-spinner"></i></div>
+        </div>
+        <div class="am-process-up-border"></div>
+        <div class="am-process-down-border"></div>
+      </div>
+      <div id="process-end" class="am-process-item unpay">
+        <i class="am-icon process unpay" aria-hidden="true"></i>
+        <div class="am-process-content">
+          <div id="coin_finish1"  class="am-process-main">等待出货</div>
+        </div>
+        <div class="am-process-up-border"></div>
+      </div>
+    </div>
+    <!--TODO 广告-->
+    <div class="friendship">
+    <div class="friendship">
+      <a href="https://display.intdmp.com/site_login_ijf.htm?app_key=adhua1b216aa62fb4f6f">
+        <img src="img/1.png" alt="" style="width:80%;margin:30px;">
+      </a>
+      <div class="ftips">
+        <span class="tag">广告</span>
+      </div>
+    </div>
+    <div class="success-over">
+      <button id='coin_finish' type="button" class="mui-btn mui-btn-success" data-loading-text="正在出货" >完成</button>
+    </div>
+  </div>
+</div>
+<!--过期重新扫码页面-->
+<div id="o-time" class="mui-modal">
+  <div class="error-wrapper">
+    <div class="error-ico">
+      <i class="mui-icon mui-icon-refresh"></i>
+    </div>
+    <h6>很抱歉，你掉线了</h6>
+    <span class="error-handle">请重新扫描二维码</span>
+  </div>
+</div>
+
+<!--出货失败页面-->
+<div id="o-fail" class="mui-modal">
+  <div class="error-wrapper">
+    <div class="error-ico">
+      <i class="mui-icon mui-icon-info"></i>
+    </div>
+    <h6>很抱歉，出货未成功</h6>
+    <div class="error-handle">款项已退回到您的余额</div>
+    <div class="error-tips">提示：主页下方可以查询您的<span class="text-danger">会员卡</span><br/>余额可以再次投币使用</div>
+    <div><button id='coin_fail' type="button" class="mui-btn">返回主页</button></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="phone">
+    <a href='tel:<%= telephone %>'><i class="mui-icon mui-icon-phone"></i>服务电话: <%= telephone %></a>
+  </div>
+  <p class="copyright">Copyright &copy; 2017</p>
+</footer>
+<!--<script src="../js/mui.min.js"></script>
+<script src="./js/jquery.min.js"></script>-->
+<script>
+/*    var sid = "<%= sid %>";//alert(sid);
+    var machalive = <%= machalive %>;
+    var insetcoin = <%= insetcoin %>;
+
+    var machsn = "<%= machsn %>";
+    var mach_duilie_num = "<%= mach_duilie_num %>";//alert(mach_duilie_num);
+    var mach_duilie_order = "<%= mach_duilie_order %>";//alert(mach_duilie_order);
+    var mfw = {
+        "consumerclient": "<%= consumerclient %>"
+    }
+    var InitLoginreturn = {
+        "mcode": "<%= mcode %>",
+        //"consumeropenid": "",
+        "consumerclient": "<%= consumerclient %>",
+        //"appid": "",
+        "ATname": "LoginReturn",
+        //"storeid": "",
+        //"shopname": "",
+        "mycard": [
+            {
+                "name": "<%= name %>",
+                "cardno": "<%= cardno %>",
+                "shopname": "<%= shopname %>",
+                "amount": "<%= amount %>",
+                "red_packet": "<%= red_packet %>",
+                //"passwd": "",
+                //"storecardid": "",
+                //"storeid": "",
+                //"localused": "",
+                //"depositmcode": "",
+                "deposit": [
+                    {
+                        "paid": "1",
+                        "given": "0"
+                    },
+                    {
+                        "paid": "2000",
+                        "given": "0"
+                    },
+                    {
+                        "paid": "3000",
+                        "given": "0"
+                    }
+                ]
+            }
+        ]
+    };
+
+    mui("#Mach_snno")[0].innerHTML = machsn;
+    mui("#localuseCardida")[0].innerHTML = InitLoginreturn.mycard[0].cardno;
+    mui("#LocalUsed_Card_amount")[0].innerHTML = InitLoginreturn.mycard[0].amount / 100;
+    mui("#LocalUsed_Card_redpacket")[0].innerHTML = InitLoginreturn.mycard[0].red_packet / 100;
+
+    mui("#deposit_cardname")[0].innerHTML = InitLoginreturn.mycard[0].cardno;
+
+    // 警告消息
+    function MToast(type, tips) {
+        var tmp;
+        switch (type) {
+            // 警告类型
+            case 'danger':
+                tmp = '<i class="mui-icon mui-icon-close danger"></i>';
+                break;
+            case 'loading':
+                tmp = '<i><span class="mui-spinner mui-spinner-white"></span></i>';
+                break;
+            // 默认类型
+            default:
+                tmp = '<i class="mui-icon mui-icon-info"></i>';
+                break;
+        }
+        mui.toast(tmp + tips, {
+            duration: 'short',
+            type: 'div'
+        });
+    }
+    //购物结束
+    $('#coin_finish').on('click', function () {
+        $('#modal').removeClass('mui-active');
+    })
+    //出货失败
+    $('#coin_fail').on('click', function () {
+        $('#o-fail').removeClass('mui-active');
+    })*/
+
+    // 随机显示一张图片
+    var randimg = document.querySelector('.friendship>a>img');
+    console.log(randimg);
+    var randnum = Math.random();
+    if (randnum < 0.33) {
+        randimg.setAttribute('src', 'img/1.png')
+    } else if (randnum < 0.66) {
+        randimg.setAttribute('src', 'img/2.png')
+    } else {
+        randimg.setAttribute('src', 'img/3.png')
+    }
+</script>
+<!--<script type="text/javascript" src="../js/app.js?" +Math.random()></script>-->
+</body>
+
+</html>
