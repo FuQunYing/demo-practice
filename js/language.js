@@ -102,9 +102,10 @@ var execI18n = function(){
         language: i18nLanguage,
         callback: function(){//加载成功后设置显示内容
             var insertEle=$(".i18n");
-            console.log('i18n写入中');
+            console.log('i18n写入中',insertEle);
             insertEle.each(function() {
                 //根据i18n元素的name获取内容写入
+                console.log($(this));
                 $(this).html($.i18n.prop($(this).attr('name')));
             });
             console.log('写入完毕');

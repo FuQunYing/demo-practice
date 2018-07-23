@@ -128,6 +128,7 @@
      * Eg, jQuery.i18n.prop('com.company.bundles.menu_add')
      */
     $.i18n.prop = function (key /* Add parameters as function arguments as necessary  */) {
+        console.log(key);
 
         var args = [].slice.call(arguments);
 
@@ -267,7 +268,7 @@
                 $.i18n.map[key] = arr;
             }
         }
-
+        console.log(value,namespace);
         if (value.length === 0) {
             return "";
         }
