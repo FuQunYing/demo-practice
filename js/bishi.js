@@ -358,4 +358,12 @@ obj.fn1();//27，调用也还是用自己，前面的对闭包内的没有影响
 alert(window.number);//8
 alert(obj.number);//8
 
-//TODO:面试题day03面向对象
+//TODO:day03面向对象*/
+function fun(n,o){
+    console.log(o);//输出第二个参数
+    return {
+        fun:function(m){
+            return fun(m,n);
+    }
+    }
+}
