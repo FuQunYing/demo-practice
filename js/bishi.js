@@ -360,6 +360,7 @@ alert(obj.number);//8
 */
 
 //day03
+// 闭包
 // function fun(n,o){
 //     console.log(o);//输出第二个参数
 //     return {
@@ -385,3 +386,64 @@ alert(obj.number);//8
 // a.fun(1);//0
 // a.fun(2);//0
 // a.fun(3);//0
+
+// var arr=[];
+// function fun() {
+//     for (var i=0;i<4;i++){
+//         var x={};
+//         // x.no=i;
+//         // x.text=arr[i];
+//         x.fun=function(){
+//             console.log(i);
+//         };
+//         arr.push(x);
+//     }//i=4，最后全都被覆盖为4
+//     console.log(arr);
+//     /*
+//     arr:[
+//       {fun(){console.log(i)}},
+//       {fun(){console.log(i)}},
+//       {fun(){console.log(i)}},
+//       {fun(){console.log(i)}},
+//     ]
+//   */
+// }
+// fun();
+// arr[0].fun();//4
+// arr[1].fun();//4
+// arr[2].fun();//4
+// arr[3].fun();//4
+
+// var funs=(function(){
+//     for (var i=0,arr=[];i<3;i++){
+//         arr[i]=function(){
+//             console.log(i);
+//         }//i=3，最后被覆盖为3
+//     }
+//     return arr;
+// })();
+// /*
+// funs:[
+//     0: function(){console.log(i)},
+//     1: function(){console.log(i)},
+//     2: function(){console.log(i)}
+// ]
+//  */
+// funs[0]();//3
+// funs[1]();//3
+// funs[2]();//3
+
+// 面向对象
+this.a=300;
+function fn1(){
+    this.a=100;this.b=200;
+    return function(){
+        console.log(this.a);
+    }.call(arguments[0])
+}
+function fn2(){this.a=new fn1();}
+var a=new fn1();//300
+/*{a:100,b:200}*/
+var v=new fn1(
+    fn2()
+)
