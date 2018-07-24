@@ -357,13 +357,31 @@ fn1();//9,用的自己的，没有去全局
 obj.fn1();//27，调用也还是用自己，前面的对闭包内的没有影响
 alert(window.number);//8
 alert(obj.number);//8
+*/
 
-//TODO:day03面向对象*/
-function fun(n,o){
-    console.log(o);//输出第二个参数
-    return {
-        fun:function(m){
-            return fun(m,n);
-    }
-    }
-}
+//day03
+// function fun(n,o){
+//     console.log(o);//输出第二个参数
+//     return {
+//         fun:function(m){//保护第一个参数
+//             return fun(m,n);
+//         }
+//     }
+// }
+// var b=fun(0)//undefined
+// /*b:{fun(){return fun(m,n=0)}}*/
+//     .fun(1)//0
+// /*b:{fun(){return fun(m.n=1)}}*/
+//     .fun(2)//1
+// /*b:{fun(){return fun(m,n=2)}}*/
+//     .fun(3);//2
+// var c=fun(0)//undefined
+//     .fun(1);//0
+// /*c:{fun(){return fun(m,n=1)}}*/
+// c.fun(2);//1
+// c.fun(3);//1
+// var a=fun(0);//undefined
+// /*a:{fun(){return fun(m,n=0)}}*/
+// a.fun(1);//0
+// a.fun(2);//0
+// a.fun(3);//0
