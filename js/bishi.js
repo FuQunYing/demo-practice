@@ -434,6 +434,7 @@ alert(obj.number);//8
 // funs[2]();//3
 
 // 面向对象
+/*TODO:没搞懂
 this.a=300;
 function fn1(){
     this.a=100;this.b=200;
@@ -443,7 +444,95 @@ function fn1(){
 }
 function fn2(){this.a=new fn1();}
 var a=new fn1();//300
-/*{a:100,b:200}*/
+/!*{a:100,b:200}*!/
 var v=new fn1(
     fn2()
-)
+);*/
+
+/*var setObj=function(o) { // o=p={name:"xixi",age:24}
+    o.name = "xiaoming";
+    o={};//和p无关了
+    o.name = "xiaohong"
+};
+var p = {name: "xixi", age : 24};
+setObj(p);
+console.log(p);*/
+
+/*
+var number=2;//4//8
+var obj={
+    number:4,//8
+    fn1: (function(){
+        this.number *= 2;
+        var number =3;
+        return function() {
+            this.number *=2;
+            number *=3;
+            console.log(number);
+        }
+    })()
+     // fn1:function() {{number=3,9,27)
+     // this.number=2;
+     // number *=3;
+     // console.log(number)
+
+};
+var fn1=obj.fn1;
+console.log(number);//4
+fn1();//9
+obj.fn1();//27
+console.log(window.number);//8
+console.log(obj.number);//8
+*/
+
+/*
+var x=5;
+var o={
+    x:10,
+    doit: function doit(){
+        var x=20;
+        setTimeout(
+            function(){console.log(this.x)},10
+        );
+    //    return ?
+    }
+};
+console.log(o.doit()); //undefined 5,定时器中的this指向window，如果不加定时器就是x=20了
+*/
+
+/*TODO:没有明白
+function Foo() {
+    getName=function(){
+        console.log(1);
+    };
+    return this;
+}
+Foo.getName=function(){console.log(2)};
+Foo.prototype.getName=function() {console.log(3)};
+var getName=function() {console.log(4)};
+Foo.getName();//2,直接调用咩有问题
+getName();//4，直接调用
+Foo().getName();//1，直接调用，全局的getName被覆盖为getName(){console.log(1)}
+getName();//1
+new Foo.getName();//2
+new Foo().getName();//3
+new new Foo().getName();//3
+*/
+
+/*TODO
+var foo=function() {
+    console.log(this.a);
+};
+var obj={a:2,foo:foo};
+var a=10;
+var bar=obj.foo;
+var bar2=foo.bind(obj);
+bar(); //10
+bar2(); //2
+foo(); //10
+obj.foo(); //2
+setTimeout(bar,0); //10
+*/
+var str="hello";
+str.len=10;//相当于 new String(str).len=10，然后立刻释放
+console.log(str.len);// undefined
